@@ -1,0 +1,15 @@
+<!--
+  filtros.html — el marcado de <Filtros>. Los cuatro botones están escritos a mano;
+  en React se escribe UNO y se repite con categorias.map(...).
+  En clase, dentro del return de Filtros.tsx:
+    1. class  →  className
+    2. los cuatro <button>  →  {categorias.map((c) => <button key={c} ...>{c}</button>)}
+    3. la clase --activo  →  sólo cuando c === activa
+    4. onClick={() => onCambiar(c)}
+-->
+<nav class="filtros">
+  <button class="filtros__boton filtros__boton--activo">todas</button>
+  <button class="filtros__boton">calzado</button>
+  <button class="filtros__boton">ropa</button>
+  <button class="filtros__boton">accesorios</button>
+</nav>

@@ -1,0 +1,489 @@
+/* ==========================================================================
+   index.css — Tienda estilo MMA / UFC
+   Negro profundo, rojo octágono, tipografía condensada en mayúsculas,
+   cortes angulares. Mismos nombres de clase que el código base.
+   ========================================================================== */
+
+:root {
+  --rojo:        #d20a0a;
+  --rojo-vivo:   #ff2a2a;
+  --rojo-oscuro: #8a0505;
+  --oro:         #e8b923;
+  --negro:       #070707;
+  --carbon:      #111111;
+  --panel:       #181818;
+  --acero:       #2a2a2a;
+  --linea:       #333333;
+  --blanco:      #f5f5f5;
+  --gris:        #a3a3a3;
+  --verde:       #22c55e;
+
+  --fuente-titulo: "Oswald", "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --fuente-texto:  "Barlow Condensed", "Barlow", "Arial Narrow", system-ui, sans-serif;
+
+  --corte: 14px; /* tamaño de la esquina cortada */
+
+  font-family: var(--fuente-texto);
+  font-size: 18px;
+  color: var(--blanco);
+  background: var(--negro);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(210, 10, 10, 0.18), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 14px),
+    var(--negro);
+  background-attachment: fixed;
+}
+
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button:focus-visible { outline: 2px solid var(--oro); outline-offset: 3px; }
+
+/* ---------- <Layout> ---------- */
+.tienda {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido {
+  flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px 24px 130px;   /* abajo deja lugar para el pie fijo */
+}
+
+/* ---------- <Encabezado> ---------- */
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background: linear-gradient(180deg, #000 0%, var(--carbon) 100%);
+  border-bottom: 3px solid var(--rojo);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+
+.encabezado__marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--fuente-titulo);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-style: italic;
+  color: var(--blanco);
+}
+
+.encabezado__carrito {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px 8px 26px;
+  background: var(--rojo);
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.encabezado__carrito strong {
+  min-width: 26px;
+  padding: 1px 6px;
+  background: #000;
+  color: var(--oro);
+  font-size: 18px;
+  text-align: center;
+}
+
+/* ---------- Título de la página ---------- */
+.portada {
+  position: relative;
+  padding-left: 22px;
+}
+
+.portada::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 8px;
+  background: var(--rojo);
+  transform: skewX(-14deg);
+  box-shadow: 10px 0 0 var(--rojo-oscuro);
+}
+
+.portada h1 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(38px, 7vw, 68px);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--blanco);
+}
+
+.portada p {
+  margin: 10px 0 0;
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rojo-vivo);
+}
+
+/* ---------- <Filtros> ---------- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--linea);
+}
+
+.filtros__boton {
+  padding: 9px 26px;
+  border: 0;
+  background: var(--acero);
+  color: var(--gris);
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.filtros__boton:hover { background: var(--linea); color: var(--blanco); transform: translateY(-2px); }
+
+.filtros__boton--activo,
+.filtros__boton--activo:hover {
+  background: var(--rojo);
+  color: #fff;
+}
+
+/* ---------- <Catalogo> ---------- */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+/* ---------- <TarjetaProducto> ---------- */
+.tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--panel), var(--carbon));
+  border: 1px solid var(--linea);
+  border-top: 3px solid var(--rojo);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--corte)), calc(100% - var(--corte)) 100%, 0 100%);
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  border-color: var(--rojo-vivo);
+}
+
+.tarjeta__imagen {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--acero);
+  filter: contrast(1.08) saturate(0.95);
+  transition: transform 0.35s;
+}
+
+.tarjeta:hover .tarjeta__imagen { transform: scale(1.04); }
+
+/* la imagen hace zoom sin salirse de su marco */
+.tarjeta::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(180deg, transparent 55%, rgba(17, 17, 17, 0.95));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tarjeta__cuerpo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  padding: 4px 18px 22px;
+  margin-top: -14px;
+}
+
+.tarjeta__nombre {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--blanco);
+}
+
+.tarjeta__precio {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 28px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--rojo-vivo);
+}
+
+.tarjeta__existencia {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.tarjeta__existencia--agotado {
+  align-self: flex-start;
+  padding: 2px 12px;
+  background: var(--rojo-oscuro);
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+
+/* tarjeta agotada: se apaga la imagen */
+.tarjeta:has(.tarjeta__existencia--agotado) .tarjeta__imagen { filter: grayscale(1) brightness(0.45); }
+.tarjeta:has(.tarjeta__existencia--agotado) { border-top-color: var(--linea); }
+
+.tarjeta__boton {
+  margin-top: auto;
+  padding: 12px;
+  border: 0;
+  background: var(--rojo);
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  transition: background 0.15s, letter-spacing 0.15s;
+}
+
+.tarjeta__boton:hover:not(:disabled) { background: var(--rojo-vivo); letter-spacing: 0.22em; }
+.tarjeta__boton:active:not(:disabled) { background: var(--rojo-oscuro); }
+.tarjeta__boton:disabled { background: var(--acero); color: #666; }
+
+/* ---------- <PiePagina>: el carrito, fijo abajo ---------- */
+.pie {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 32px;
+  background: #000;
+  border-top: 3px solid var(--rojo);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.7);
+  color: var(--blanco);
+}
+
+.pie__resumen {
+  font-family: var(--fuente-titulo);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.pie__total {
+  font-family: var(--fuente-titulo);
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  color: var(--blanco);
+}
+
+.pie__total::before {
+  content: "Total ";
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rojo-vivo);
+}
+
+.pie__boton {
+  padding: 10px 26px;
+  border: 0;
+  background: var(--rojo);
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.pie__boton:hover { background: var(--rojo-vivo); }
+
+/* ---------- Opcional 12B: la lista dentro del carrito ---------- */
+.pie__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  color: var(--gris);
+}
+
+/* ---------- Práctica 13 · <Cargando> y <Error> ---------- */
+.cargando {
+  padding: 70px 0;
+  text-align: center;
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.cargando__rueda {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 16px;
+  border: 4px solid var(--acero);
+  border-top-color: var(--rojo-vivo);
+  border-radius: 50%;
+  animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+.error {
+  padding: 26px;
+  border: 1px solid var(--rojo);
+  border-left: 8px solid var(--rojo);
+  background: rgba(210, 10, 10, 0.1);
+  color: #ffb4b4;
+  text-align: center;
+}
+
+.error button {
+  margin-top: 14px;
+  padding: 10px 24px;
+  border: 0;
+  background: var(--rojo);
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+/* ---------- Práctica 13 · <FormularioPago> ---------- */
+.pago {
+  display: grid;
+  gap: 14px;
+  max-width: 440px;
+  margin: 36px 0 0;
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-top: 3px solid var(--rojo);
+}
+
+.pago h2 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pago label {
+  display: grid;
+  gap: 6px;
+  font-family: var(--fuente-titulo);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.pago input {
+  padding: 11px 14px;
+  border: 1px solid var(--linea);
+  background: var(--negro);
+  color: var(--blanco);
+  font: inherit;
+  font-size: 18px;
+}
+
+.pago input:focus { outline: none; border-color: var(--rojo-vivo); box-shadow: 0 0 0 2px rgba(255, 42, 42, 0.25); }
+
+.pago__error { margin: 0; color: var(--rojo-vivo); font-size: 15px; }
+
+.pago button {
+  padding: 13px;
+  border: 0;
+  background: var(--rojo);
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+}
+
+.pago button:hover:not(:disabled) { background: var(--rojo-vivo); }
+.pago button:disabled { opacity: 0.5; }
+
+.confirmacion {
+  margin: 36px 0 0;
+  padding: 20px 24px;
+  border-left: 8px solid var(--verde);
+  background: rgba(34, 197, 94, 0.1);
+  color: #86efac;
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Pantallas chicas ---------- */
+@media (max-width: 600px) {
+  .encabezado, .pie { padding-left: 16px; padding-right: 16px; }
+  .encabezado__marca { font-size: 20px; letter-spacing: 0.08em; }
+  .pie__total { font-size: 26px; }
+  .pie__total::before { display: none; }
+  .contenido { padding: 24px 16px 120px; }
+}

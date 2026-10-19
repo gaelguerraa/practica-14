@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+  vista-previa.html — las cuatro piezas juntas, con los estilos de la tienda.
+  Ábrela con doble clic (desde codigo-base/html/) para ver cómo debe quedar antes de
+  escribir React. Usa ../index.css y ../img/, así que no la muevas de carpeta.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda · vista previa</title>
+  <link rel="stylesheet" href="../index.css">
+</head>
+<body>
+  <div class="tienda">
+    <header class="encabezado">
+      <div class="encabezado__marca">
+        <img src="../img/logo.svg" alt="" height="32">
+        Tienda
+      </div>
+      <span class="encabezado__carrito">Carrito: <strong>0</strong></span>
+    </header>
+
+    <main class="contenido">
+      <section class="portada">
+        <h1>Catálogo de temporada</h1>
+        <p>12 productos</p>
+      </section>
+
+      <nav class="filtros">
+        <button class="filtros__boton filtros__boton--activo">todas</button>
+        <button class="filtros__boton">calzado</button>
+        <button class="filtros__boton">ropa</button>
+        <button class="filtros__boton">accesorios</button>
+      </nav>
+
+      <section class="catalogo">
+        <article class="tarjeta">
+          <img class="tarjeta__imagen" src="../img/producto-01.jpg" alt="Tenis para correr Vento">
+          <div class="tarjeta__cuerpo">
+            <h3 class="tarjeta__nombre">Tenis para correr Vento</h3>
+            <p class="tarjeta__precio">$1,299.00</p>
+            <p class="tarjeta__existencia">8 disponibles</p>
+            <button class="tarjeta__boton">Agregar al carrito</button>
+          </div>
+        </article>
+        <article class="tarjeta">
+          <img class="tarjeta__imagen" src="../img/producto-09.jpg" alt="Licra de compresión">
+          <div class="tarjeta__cuerpo">
+            <h3 class="tarjeta__nombre">Licra de compresión</h3>
+            <p class="tarjeta__precio">$529.00</p>
+            <p class="tarjeta__existencia tarjeta__existencia--agotado">Agotado</p>
+            <button class="tarjeta__boton" disabled>Agregar al carrito</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <span class="pie__resumen">Tu carrito está vacío</span>
+      <span class="pie__total">$0.00</span>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<!--
+  pie-pagina.html — el marcado de <PiePagina>, el carrito fijo abajo.
+  En clase, dentro del return de PiePagina.tsx:
+    1. class  →  className
+    2. el texto fijo  →  {piezas === 0 ? 'Tu carrito está vacío' : `${piezas} pieza(s) en el carrito`}
+    3. $3,247.00      →  {pesos.format(total)}
+-->
+<footer class="pie">
+  <span class="pie__resumen">3 pieza(s) en el carrito</span>
+  <span class="pie__total">$3,247.00</span>
+</footer>

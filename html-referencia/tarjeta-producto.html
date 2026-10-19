@@ -1,0 +1,31 @@
+<!--
+  tarjeta-producto.html — el marcado de <TarjetaProducto>. Vienen las dos caras: con
+  existencia y agotado. En clase, dentro del return de TarjetaProducto.tsx:
+    1. class  →  className
+    2. <img ...>  →  <img ... />
+    3. los valores fijos  →  {producto.imagen}, {producto.nombre}, {pesos.format(producto.precio)}
+    4. las dos caras  →  una sola, que decide con la constante agotado
+    5. el botón  →  disabled={agotado} y onClick={() => onAgregar(producto)}
+-->
+
+<!-- Con existencia -->
+<article class="tarjeta">
+  <img class="tarjeta__imagen" src="/img/producto-01.jpg" alt="Tenis para correr Vento">
+  <div class="tarjeta__cuerpo">
+    <h3 class="tarjeta__nombre">Tenis para correr Vento</h3>
+    <p class="tarjeta__precio">$1,299.00</p>
+    <p class="tarjeta__existencia">8 disponibles</p>
+    <button class="tarjeta__boton">Agregar al carrito</button>
+  </div>
+</article>
+
+<!-- Agotado: cambia la existencia (clase extra) y el botón sale deshabilitado -->
+<article class="tarjeta">
+  <img class="tarjeta__imagen" src="/img/producto-09.jpg" alt="Licra de compresión">
+  <div class="tarjeta__cuerpo">
+    <h3 class="tarjeta__nombre">Licra de compresión</h3>
+    <p class="tarjeta__precio">$529.00</p>
+    <p class="tarjeta__existencia tarjeta__existencia--agotado">Agotado</p>
+    <button class="tarjeta__boton" disabled>Agregar al carrito</button>
+  </div>
+</article>
